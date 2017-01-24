@@ -1,0 +1,29 @@
+<table class="table table-responsive">
+  <thead>
+  <tr>
+    <input type="text" placeholder="Search students..." class="form-control" ng-model="filter"/>
+  </tr>
+  <tr>
+    <autocomplete></autocomplete>
+  </tr>
+  <tr>
+    <th ng-click="sortColumn = 'name'; reversed = !reversed">{{'Name' | translate}}</th>
+    <th ng-click="sortColumn = 'knowledge'; reversed = !reversed">{{'Knowledge' | translate}}</th>
+    <th ng-click="sortColumn = 'hourlyWage'; reversed = !reversed">{{'Hourly wage' | translate}}</th>
+    <th ng-click="sortColumn = 'available'; reversed = !reversed">{{'Available' | translate}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="item in data | filter: filter | orderBy: sortColumn : reversed">
+    <td>{{item.name}}</td>
+    <td>{{item.knowledge}}</td>
+    <td>{{item.hourlyWage | currency}}</td>
+    <td>{{item.available}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="alert alert-danger" ng-show="error">
+  {{'Could not retrieve information about available student programmers' | translate}}
+</div>
+

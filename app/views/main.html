@@ -1,0 +1,31 @@
+<div class="jumbotron">
+  <p id="presentation-begins">{{'The presentation started at' | translate}} {{ tStart | date : 'short'}}</p>
+  <p>
+    <input type="date" ng-model="tStart">
+    <input type="time" ng-model="tStart">
+  </p>
+  <div ng-show="tStart < now">
+    <p>{{'Supposing my customer will pay me' | translate}}</p>
+    <p><input type="number" ng-model="hourlyWage"> {{'bucks' | translate}}
+      <button ng-click="changeHourlyWage(5)" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-plus"></i></button>
+      <button ng-click="changeHourlyWage(-5)" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-minus"></i></button>
+    </p>
+    <p>{{'per hour, I have now' | translate}} {{salary(tStart, now, hourlyWage) | number : 2}} {{'bucks' | translate}} {{'more than this morning' | translate}}</p>
+
+
+  </div>
+</div>
+<div class="row" style="font-size: 150%" ng-show="tStart < now">
+  <div class="alert alert-danger animate-show-hide" ng-show="hourlyWage < 40">
+    {{'Danger! Customer is paying way too less money... leave the room immediately!' | translate}}
+  </div>
+  <div class="alert alert-warning animate-show-hide" ng-show="hourlyWage >= 40 && hourlyWage < 60">
+    {{'Warning! Customer is paying not very good... finish your job and then get out of here!' | translate}}
+  </div>
+  <div class="alert alert-info animate-show-hide" ng-show="hourlyWage >= 60 && hourlyWage < 80">
+    {{'Info: Customer is paying good... exchange business cards!' | translate}}
+  </div>
+  <div class="alert alert-success animate-show-hide" ng-show="hourlyWage >= 80">
+    {{'Success: Customer is paying very good! Hire cheap student programmer for all future jobs!' | translate}}
+  </div>
+</div>
